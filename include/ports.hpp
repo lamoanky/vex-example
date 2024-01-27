@@ -16,7 +16,7 @@
 #define INTAKE 17
 #define LEFT_BACK 7
 #define LEFT_MIDDLE 14
-#define LEFT_FRONT 20
+#define  20
 #define RIGHT_BACK 6
 #define RIGHT_MIDDLE 16
 #define RIGHT_FRONT 12

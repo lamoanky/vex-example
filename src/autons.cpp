@@ -244,3 +244,23 @@ void interfered_example() {
 // . . .
 // Make your own autonomous functions here!
 // . . .
+
+void lamonky1(){
+  chassis.set_drive_pid(10, 127, true);
+  chassis.wait_drive();
+
+  chassis.set_turn_pid(90, TURN_SPEED);
+  chassis.wait_drive();
+
+  chassis.set_turn_pid(90, TURN_SPEED);
+  chassis.wait_drive();
+
+  chassis.set_turn_pid(90, TURN_SPEED);
+  chassis.wait_drive();
+
+  chassis.set_turn_pid(90, TURN_SPEED);
+  chassis.wait_drive();
+
+  chassis.set_drive_pid(-10, -127, true);
+  chassis.wait_drive();
+}

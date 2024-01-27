@@ -5,7 +5,7 @@
 Drive chassis (
   // Left Chassis Ports (negative port will reverse it!)
   //   the first port is the sensored port (when trackers are not used!)
-  {-LEFT_FRONT, -LEFT_MIDDLE, -LEFT_BACK}
+  {-, -LEFT_MIDDLE, -LEFT_BACK}
 
   // Right Chassis Ports (negative port will reverse it!)
   //   the first port is the sensored port (when trackers are not used!)
