@@ -15,3 +15,7 @@ void interfered_example();
 void default_constants();
 void one_mogo_constants();
 void two_mogo_constants();
+
+void lamonky1();
+void AWPGG();   
+void Iloveomnkyskill();

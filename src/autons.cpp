@@ -29,29 +29,29 @@ void default_constants() {
   chassis.set_pid_constants(&chassis.headingPID, 11, 0, 20, 0);
   chassis.set_pid_constants(&chassis.forward_drivePID, 0.45, 0, 5, 0);
   chassis.set_pid_constants(&chassis.backward_drivePID, 0.45, 0, 5, 0);
-  chassis.set_pid_constants(&chassis.turnPID, 5, 0.003, 35, 15);
+  chassis.set_pid_constants(&chassis.turnPID, 6.5, 0.0015, 64, 0);
   chassis.set_pid_constants(&chassis.swingPID, 7, 0, 45, 0);
 }
 
-void one_mogo_constants() {
-  chassis.set_slew_min_power(80, 80);
-  chassis.set_slew_distance(7, 7);
-  chassis.set_pid_constants(&chassis.headingPID, 11, 0, 20, 0);
-  chassis.set_pid_constants(&chassis.forward_drivePID, 0.45, 0, 5, 0);
-  chassis.set_pid_constants(&chassis.backward_drivePID, 0.45, 0, 5, 0);
-  chassis.set_pid_constants(&chassis.turnPID, 5, 0.003, 35, 15);
-  chassis.set_pid_constants(&chassis.swingPID, 7, 0, 45, 0);
-}
+// void one_mogo_constants() {
+//   chassis.set_slew_min_power(80, 80);
+//   chassis.set_slew_distance(7, 7);
+//   chassis.set_pid_constants(&chassis.headingPID, 11, 0, 20, 0);
+//   chassis.set_pid_constants(&chassis.forward_drivePID, 0.45, 0, 5, 0);
+//   chassis.set_pid_constants(&chassis.backward_drivePID, 0.45, 0, 5, 0);
+//   chassis.set_pid_constants(&chassis.turnPID, 5, 0.003, 35, 15);
+//   chassis.set_pid_constants(&chassis.swingPID, 7, 0, 45, 0);
+// }
 
-void two_mogo_constants() {
-  chassis.set_slew_min_power(80, 80);
-  chassis.set_slew_distance(7, 7);
-  chassis.set_pid_constants(&chassis.headingPID, 11, 0, 20, 0);
-  chassis.set_pid_constants(&chassis.forward_drivePID, 0.45, 0, 5, 0);
-  chassis.set_pid_constants(&chassis.backward_drivePID, 0.45, 0, 5, 0);
-  chassis.set_pid_constants(&chassis.turnPID, 5, 0.003, 35, 15);
-  chassis.set_pid_constants(&chassis.swingPID, 7, 0, 45, 0);
-}
+// void two_mogo_constants() {
+//   chassis.set_slew_min_power(80, 80);
+//   chassis.set_slew_distance(7, 7);
+//   chassis.set_pid_constants(&chassis.headingPID, 11, 0, 20, 0);
+//   chassis.set_pid_constants(&chassis.forward_drivePID, 0.45, 0, 5, 0);
+//   chassis.set_pid_constants(&chassis.backward_drivePID, 0.45, 0, 5, 0);
+//   chassis.set_pid_constants(&chassis.turnPID, 5, 0.003, 35, 15);
+//   chassis.set_pid_constants(&chassis.swingPID, 7, 0, 45, 0);
+// }
 
 
 void modified_exit_condition() {
@@ -246,21 +246,232 @@ void interfered_example() {
 // . . .
 
 void lamonky1(){
-  chassis.set_drive_pid(10, 127, true);
+
+  // 5 ball
+  pneum_intake.set_value(true);
+  intake.move_voltage(12000);
+  chassis.set_drive_pid(6, 80);
   chassis.wait_drive();
 
-  chassis.set_turn_pid(90, TURN_SPEED);
+  pros::delay(750);
+
+  //grabs the triball underneath the elevation bar
+
+  chassis.set_drive_pid(-35, 60, true);
   chassis.wait_drive();
 
-  chassis.set_turn_pid(90, TURN_SPEED);
+  chassis.set_turn_pid(-35, 127);
   chassis.wait_drive();
 
-  chassis.set_turn_pid(90, TURN_SPEED);
+  chassis.set_drive_pid(-26, 80, true);
   chassis.wait_drive();
 
-  chassis.set_turn_pid(90, TURN_SPEED);
+  //around here you could maybe set up the descore mech for a 6 ba;l
+
+  chassis.set_turn_pid(90, 127);
   chassis.wait_drive();
 
-  chassis.set_drive_pid(-10, -127, true);
+
+  intake.move_voltage(-12000);  
+  chassis.set_drive_pid(18, 127);
   chassis.wait_drive();
+
+  //backs up from elevation bar, pushes alliance triball, turns around, pushes the two in
+
+  intake.move_voltage(0);
+
+  chassis.set_drive_pid(-11.5, 127);
+  chassis.wait_drive();
+  chassis.set_turn_pid(15, 127);
+  chassis.wait_drive();
+
+  intake.move_voltage(12000);
+  chassis.set_drive_pid(49.5, 127, true);
+  chassis.wait_drive();
+
+  //backs up, turns to the corner triball, picks it up
+
+  chassis.set_turn_pid(145, 127);
+  chassis.wait_drive();
+  chassis.set_drive_pid(25, 127, true);
+  chassis.wait_drive();
+  intake.move_voltage(-12000);
+  chassis.set_drive_pid(-15, 127, true);
+  chassis.wait_drive();
+
+  //deposits corner triball near the net
+
+  chassis.set_turn_pid(55, 127);
+  chassis.wait_drive();  
+
+  intake.move_voltage(12000);
+  chassis.set_drive_pid(19.5, 127, true);
+  chassis.wait_drive();
+ 
+  chassis.set_turn_pid(180, 127);
+  chassis.wait_drive();
+
+  
+
+  //grabs far middle triball, turns around
+
+  pneum_wings.set_value(true);
+  pros::delay(100);
+  intake.move_voltage(-12000);
+  chassis.set_drive_pid(120, 127);
+  pros::delay(1000);
+
+  pneum_wings.set_value(false);
+  chassis.set_drive_pid(-15, 127);
+  chassis.wait_drive();
+
+  //extends wings and pushes the 3 triballs, backs up and closes wings
+  
+
+
+
+
+  // chassis.set_drive_pid(-30, DRIVE_SPEED, true);
+  // chassis.wait_drive();
+}
+
+void AWPGG(){
+
+  pneum_wings.set_value(true);
+  pros::delay(500);
+  pneum_wings.set_value(false);
+  intake.move_voltage(12000);
+  chassis.set_drive_pid(55, 127);
+  chassis.wait_drive();
+  chassis.set_turn_pid(80, 127);
+  chassis.wait_drive();
+  intake.move_voltage(-12000);
+  pneum_wings.set_value(true);
+  chassis.set_drive_pid(24, 127);
+  chassis.wait_drive();
+  pneum_wings.set_value(false);
+  chassis.set_turn_pid(195, 127);
+  chassis.wait_drive();
+  intake.move_voltage(0);
+  chassis.set_drive_pid(55, 127);
+  chassis.wait_drive();
+  chassis.set_turn_pid(300, 127);
+  chassis.wait_drive();
+  chassis.set_drive_pid(30, 80, true);
+  chassis.wait_drive();
+  chassis.set_turn_pid(345, 127);
+  chassis.wait_drive();
+  intake.move_voltage(-12000);
+  chassis.set_drive_pid(7, 127);
+  chassis.wait_drive();
+  chassis.set_drive_pid(-10, 127);
+  chassis.wait_drive();
+  intake.move_voltage(0);
+  chassis.set_turn_pid(480, 127);
+  chassis.wait_drive();
+  chassis.set_drive_pid(30, 127);
+  chassis.wait_drive();
+  chassis.set_turn_pid(360, 127);
+  chassis.wait_drive();
+  chassis.set_drive_pid(50, 127);
+  chassis.wait_drive();
+
+//   intake = 127;
+//     chassis.set_drive_pid(12, 30, true);
+//   chassis.wait_drive();
+//   pneum_descore1.set_value(true);
+//   chassis.set_drive_pid(-7.5, 60);
+//   chassis.wait_drive();
+
+//   pros::delay(250);
+  
+  
+//   chassis.set_turn_pid(-45, 127);
+//   chassis.wait_drive();
+//   pros::delay(250);
+//   pneum_descore1.set_value(false);
+//   chassis.set_drive_pid(-13, 60, true);
+//   chassis.wait_drive();  
+
+//   chassis.set_turn_pid(45, 127);
+//   chassis.wait_drive();
+  
+
+//   chassis.set_drive_pid(40, 127);
+//   chassis.wait_drive();
+//   chassis.set_turn_pid(-40.5, 127);
+//   chassis.wait_drive();
+
+  
+
+//   intake = -127;
+
+//   pros::delay(100);
+
+//   chassis.set_drive_pid(-5, 127, true);
+//   chassis.wait_drive();
+
+//   chassis.set_turn_pid(135, 127);
+//   chassis.wait_drive();
+
+//   pneum_wings.set_value(true);
+//   chassis.set_drive_pid(20, 127, true);
+//   chassis.wait_drive();
+//   pneum_wings.set_value(false);
+
+
+
+//   chassis.set_drive_pid(-29, 127, true);
+//   chassis.wait_drive();
+
+//   chassis.set_drive_pid(6.5, 127);
+//   chassis.wait_drive();
+
+//   chassis.set_turn_pid(270-45, 127);
+//   chassis.wait_drive();
+// intake = 127;
+//   chassis.set_drive_pid(48, 127);
+//   chassis.wait_drive();
+
+//   chassis.set_turn_pid(352-45, 127);
+//   chassis.wait_drive();
+
+//   chassis.set_drive_pid(-31, 127);
+//   chassis.wait_drive();
+}
+
+void Iloveomnkyskill(){;
+
+  intake.move_voltage(12000);
+  chassis.set_drive_pid(24, 127);
+  chassis.wait_drive();
+  chassis.set_turn_pid(-105, 127);
+  chassis.wait_drive();
+  chassis.set_drive_pid(20, 60, true);
+  chassis.wait_drive(); 
+  pneum_wings.set_value(true);
+
+  //fw for like 20-30 secs
+  intake.move_voltage(0);
+  flywheel.move_voltage(-12000);
+  pros::delay(40000);
+  flywheel.move_voltage(0);
+  pneum_wings.set_value(false);
+  chassis.set_turn_pid(90, 127);
+  chassis.wait_drive();
+  chassis.set_drive_pid(24, 127, true);
+  chassis.wait_drive();
+  chassis.set_turn_pid(0, 127);
+  chassis.wait_drive();
+  chassis.set_drive_pid(48, 127, true);
+  chassis.wait_drive();
+  chassis.set_turn_pid(90, 127);
+  chassis.wait_drive();
+  pneum_wings.set_value(true);
+  chassis.set_drive_pid(1000, 127, true);
+  chassis.wait_drive();
+  pros::delay(1000);
+  chassis.set_drive_pid(-24, 127, true);
+  chassis.wait_drive();
+
 }

@@ -5,7 +5,7 @@
 Drive chassis (
   // Left Chassis Ports (negative port will reverse it!)
   //   the first port is the sensored port (when trackers are not used!)
-  {-, -LEFT_MIDDLE, -LEFT_BACK}
+  {-LEFT_FRONT, -LEFT_MIDDLE, -LEFT_BACK}
 
   // Right Chassis Ports (negative port will reverse it!)
   //   the first port is the sensored port (when trackers are not used!)
@@ -26,7 +26,7 @@ Drive chassis (
   //    (or gear ratio of tracking wheel)
   // eg. if your drive is 84:36 where the 36t is powered, your RATIO would be 2.333.
   // eg. if your drive is 36:60 where the 60t is powered, your RATIO would be 0.6.
-  ,0.75
+  ,1.333333
 
 
   // Uncomment if using tracking wheels
@@ -71,6 +71,9 @@ void initialize() {
 
   // Autonomous Selector using LLEMU
   ez::as::auton_selector.add_autons({
+     Auton("GGmonky needs the AW p \n\nye", AWPGG),
+    Auton("ilo velomonkys GG\n\nNo liesHERE", lamonky1),
+    Auton("iloveskills loool\n\nstopthrowing mathc loads bro", Iloveomnkyskill),
     Auton("Example Drive\n\nDrive forward and come back.", drive_example),
     Auton("Example Turn\n\nTurn 3 times.", turn_example),
     Auton("Drive and Turn\n\nDrive forward, turn, come back. ", drive_and_turn),
@@ -83,8 +86,10 @@ void initialize() {
   // Initialize chassis and auton selector
   chassis.initialize();
   ez::as::initialize();
-  pneum_intake.set_value(false);
+  pneum_intake.set_value(true);
   pneum_wings.set_value(false);
+    pneum_descore1.set_value(false);
+
 }
 
 
@@ -95,6 +100,8 @@ void initialize() {
  * the robot is enabled, this task will exit.
  */
 void disabled() {
+   pneum_descore1.set_value(true);
+
   // . . .
 }
 
@@ -155,6 +162,8 @@ void opcontrol() {
   chassis.set_drive_brake(MOTOR_BRAKE_COAST);
   bool pneum_intake_direction = false;
   bool pneum_wings_direction = false;
+  bool pneum_descore_direction = false;
+    bool flywheelOn = false;
   while (true) {
 
     // chassis.tank(); // Tank control
@@ -174,6 +183,22 @@ void opcontrol() {
     if (ctr.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_R2)) {
         pneum_wings_direction = !pneum_wings_direction;
         pneum_wings.set_value(pneum_wings_direction);
+    }
+    if (ctr.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_A)) {
+        pneum_descore_direction = !pneum_descore_direction;
+        pneum_descore1.set_value(pneum_descore_direction);
+    }
+    if (ctr.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_Y)) {
+      flywheelOn = !flywheelOn;
+      if(flywheelOn==true)       flywheel.move_velocity(-1000000);
+      else       flywheel.move_velocity(00000);
+
+    }
+    if (ctr.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_X)) {
+      flywheelOn = !flywheelOn;
+      if(flywheelOn==true)       flywheel.move_voltage(-3500);
+      else       flywheel.move_velocity(00000);
+
     }
     pros::delay(ez::util::DELAY_TIME); // This is used for timer calculations!  Keep this ez::util::DELAY_TIME
   }

@@ -31,5 +31,6 @@ extern pros::Motor flywheel;
 
 extern pros::ADIDigitalOut pneum_wings;
 extern pros::ADIDigitalOut pneum_intake;
+extern pros::ADIDigitalOut pneum_descore1;
 
 #endif

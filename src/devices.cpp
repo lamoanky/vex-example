@@ -19,3 +19,4 @@ pros::Motor intake(INTAKE, GREEN, REVERSED, ENCODER);
 
 pros::ADIDigitalOut pneum_wings(PNEUM_WINGS);
 pros::ADIDigitalOut pneum_intake(PNEUM_INTAKE);
+pros::ADIDigitalOut pneum_descore1(PNEUM_DESCORE1);

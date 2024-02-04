@@ -1,7 +1,7 @@
 {
   "py/object": "pros.conductor.project.Project",
   "py/state": {
-    "project_name": "bingus",
+    "project_name": "disrupt",
     "target": "v5",
     "templates": {
       "EZ-Template": {
@@ -331,8 +331,10 @@
       }
     },
     "upload_options": {
-      "description": "floppa",
-      "icon": "pros"
+      "description": "obesity is the",
+      "icon": "robot",
+      "slot": 2,
+      "after": "screen"
     }
   }
 }

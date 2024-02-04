@@ -12,19 +12,20 @@
 #define __PORTS_HPP__
 
 // Motors
-#define FLYWHEEL 3
+#define FLYWHEEL 20
 #define INTAKE 17
 #define LEFT_BACK 7
 #define LEFT_MIDDLE 14
-#define  20
+#define LEFT_FRONT 4
 #define RIGHT_BACK 6
 #define RIGHT_MIDDLE 16
 #define RIGHT_FRONT 12
 
 // Pneumatics (ADI ports)
-#define PNEUM_WINGS 'E'
-#define PNEUM_CLIMB 'G'
-#define PNEUM_INTAKE 'B'
+#define PNEUM_WINGS 'H'
+#define PNEUM_DESCORE1 'C'
+
+#define PNEUM_INTAKE 'G'
 
 // Sensors
 #define IMU 10
